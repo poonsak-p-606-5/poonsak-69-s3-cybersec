@@ -10,7 +10,7 @@ services:
       - POSTGRES_DB=poonsak
   admin:
     image: dpage/pgadmin4:9.16
-    container-name: 69-s3-admin
+    container_name: 69-s3-admin
     ports: 
       - 8083:80
     environment:
