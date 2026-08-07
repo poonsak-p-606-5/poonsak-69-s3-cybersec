@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:16
+    image: postgres:16-alpine
     container_name: 69-s3-db
     ports: 
       - 54327:5432
