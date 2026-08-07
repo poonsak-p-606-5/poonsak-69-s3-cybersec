@@ -1,7 +1,18 @@
-
 services:
   db:
-    image: postgres:16-alpine
+    image: postgres:16
     container_name: 69-s3-db
-    ports:
-      -54327:5432
+    ports: 
+      - 54327:5432
+    environment:
+      - POSTGRES_PASSWORD=Prote@02
+      - POSTGRES_USER=poonsak
+      - POSTGRES_DB=poonsak
+  admin:
+    image: dpage/pgadmin4:9.16
+    container-name: 69-s3-admin
+    ports: 
+      - 8083:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=poonsak-p@rmutp.ac.th
+      - PGADMIN_DEFAULT_PASSWORD=Prote@02
