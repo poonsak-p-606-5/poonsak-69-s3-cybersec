@@ -8,6 +8,8 @@ services:
       - POSTGRES_PASSWORD=Prote@02
       - POSTGRES_USER=poonsak
       - POSTGRES_DB=poonsak
+    volumes:
+      - D:/Docker/Postgres:/var/lib/postgresql/data
   admin:
     image: dpage/pgadmin4:9.16
     container_name: 69-s3-admin
