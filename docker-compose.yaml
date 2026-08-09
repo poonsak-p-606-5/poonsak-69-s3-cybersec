@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: 69-s3-db
+    ports: 
+      - 54327:5432
+    environment:
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_DB=${DATABASE_DB}
+    volumes:
+      - D:/Docker/Postgres:/var/lib/postgresql/data
+  admin:
+    image: dpage/pgadmin4:9.16
+    container_name: 69-s3-admin
+    ports: 
+      - 8083:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=poonsak-p@rmutp.ac.th
+      - PGADMIN_DEFAULT_PASSWORD=${DATABASE_PASSWORD}
+  my_app:
+    image: prawee/strapi
+    container_name: 69-s3-app
+    ports: 
+      - 8080:1337
+    environment:
+      - DATABASE_CLIENT=postgres
+      - DATABASE_NAME=${DATABASE_DB}
+      - DATABASE_HOST= 192.168.0.105
+      - DATABASE_PORT= 54327:5432
+      - DATABASE_USERNAME=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
