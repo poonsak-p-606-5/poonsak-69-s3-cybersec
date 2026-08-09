@@ -20,7 +20,7 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=${DATABASE_PASSWORD}
   my_app:
     image: prawee/strapi
-    container_name: 69-s3-db
+    container_name: 69-s3-app
     ports: 
       - 8080:1337
     environment:
