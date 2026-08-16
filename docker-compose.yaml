@@ -16,7 +16,7 @@ services:
     ports: 
       - 8083:80
     environment:
-      - PGADMIN_DEFAULT_EMAIL=${DATABASE_EMAIL}
+      - PGADMIN_DEFAULT_EMAIL=poonsak-p@rmutp.ac.th
       - PGADMIN_DEFAULT_PASSWORD=${DATABASE_PASSWORD}
   my_app:
     image: prawee/strapi
