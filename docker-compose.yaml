@@ -17,7 +17,7 @@ services:
       - 8083:80
     environment:
       - PGADMIN_DEFAULT_EMAIL=${DATABASE_EMAIL}
-      - PGADMIN_DEFAULT_PASSWORD=${DATABASE_PASSWORD}
+      - PGADMIN_DEFAULT_PASSWORD=${DATABASE_EMAIL_PASSWORD}
   my_app:
     image: prawee/strapi
     container_name: 69-s3-app
