@@ -35,5 +35,4 @@ services:
     volumes:
       - ./data:/srv/app/data
 volumes:
-      - ./data:/srv/app/data
-      - ./data:/var/lib/postgresql/data
+  data:
