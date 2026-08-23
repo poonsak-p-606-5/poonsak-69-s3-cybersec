@@ -32,4 +32,3 @@ services:
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
 volumes:
   data:
-  
