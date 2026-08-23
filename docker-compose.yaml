@@ -3,7 +3,7 @@ services:
     image: postgres:16-alpine
     container_name: 69-s3-db
     ports: 
-      - 54388:5432
+      - 54327:5432
     environment:
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
       - POSTGRES_USER=${DATABASE_USER}
@@ -18,7 +18,7 @@ services:
     environment:
       - PGADMIN_DEFAULT_EMAIL=${DATABASE_EMAIL}
       - PGADMIN_DEFAULT_PASSWORD=${DATABASE_EMAIL_PASSWORD}
-  my_app:
+  app:
     image: prawee/strapi
     container_name: 69-s3-app
     ports: 
@@ -32,3 +32,4 @@ services:
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
 volumes:
   data:
+  
