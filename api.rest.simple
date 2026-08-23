@@ -5,7 +5,7 @@ POST http://localhost:9093/admin/login
 Content-Type: application/json 
 
 {
-"email": "poonsak-p@rmutp.ac.th",
-"password": "Prote@02",
-"rememberMe": true
+"email": "",
+"password": "",
+"rememberMe": 
 }
