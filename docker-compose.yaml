@@ -7,9 +7,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
       - POSTGRES_USER=${DATABASE_USER}
-      - POSTGRES_DB=${DATABASE_DB}
-    volumes:
-      - ./data:/var/lib/postgresql/data    
+      - POSTGRES_DB=${DATABASE_DB}   
   admin:
     image: dpage/pgadmin4:9.16
     container_name: 69-s3-admin
@@ -30,5 +28,3 @@ services:
       - DATABASE_PORT=${DATABASE_PORT}
       - DATABASE_USERNAME=${DATABASE_USER}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
-volumes:
-  data:
