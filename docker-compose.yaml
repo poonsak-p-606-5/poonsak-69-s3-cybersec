@@ -32,7 +32,5 @@ services:
       - DATABASE_PORT=${DATABASE_PORT}
       - DATABASE_USERNAME=${DATABASE_USER}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
-    volumes:
-      - ./data:/srv/app/data
 volumes:
   data:
