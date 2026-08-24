@@ -7,7 +7,9 @@ services:
     environment:
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
       - POSTGRES_USER=${DATABASE_USER}
-      - POSTGRES_DB=${DATABASE_DB}   
+      - POSTGRES_DB=${DATABASE_DB} 
+    volumes:
+      - ./data:/var/lib/postgresql/data  
   admin:
     image: dpage/pgadmin4:9.16
     container_name: 69-s3-admin
@@ -17,7 +19,7 @@ services:
       - PGADMIN_DEFAULT_EMAIL=${DATABASE_EMAIL}
       - PGADMIN_DEFAULT_PASSWORD=${DATABASE_EMAIL_PASSWORD}
     volumes:
-      - .data:/var/lib/pgadmin
+      - ./data:/var/lib/pgadmin
   my_app:
     image: prawee/strapi
     container_name: 69-s3-app
