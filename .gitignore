@@ -1,4 +1,6 @@
 .env
+.env.generated
+.env.secrets-*
 data
 api.rest
 pgadmin_data
