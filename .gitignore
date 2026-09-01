@@ -4,3 +4,4 @@
 data
 api.rest
 pgadmin_data
+generated-secrets.ps1
