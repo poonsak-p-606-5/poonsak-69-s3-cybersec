@@ -29,7 +29,17 @@ Content-Type: application/json
     "email": ""
 }
 
-### 1.4 Profile
+### 1.4 Reset Password
+POST http://localhost:9093/admin/reset-password
+Content-Type: application/json
+
+{
+    "code": "",
+    "password": "",
+    "passwordConfirmation": ""
+}
+
+### 1.5 Profile
 GET http://localhost:9093/admin/me
 
 Authorization: Bearer <Token>
@@ -62,7 +72,17 @@ Content-Type: application/json
     "email": ""
 }
 
-### 2.4 Profile
-GET http://localhost:9093/admin/me
+### 2.4 Reset Password
+POST http://localhost:9093/api/auth/reset-password
+Content-Type: application/json
+
+{
+    "code": "",
+    "password": "",
+    "passwordConfirmation": ""
+}
+
+### 2.5 Profile
+GET http://localhost:9093/api/auth/me
 
 Authorization: Bearer <Token>
