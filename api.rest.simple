@@ -65,7 +65,7 @@ Content-Type: application/json
 }
 
 ### 2.3 Forgot Password
-POST http://localhost:9093/admin/forgot-password
+POST http://localhost:9093/api/auth/forgot-password
 Content-Type: application/json
 
 {
