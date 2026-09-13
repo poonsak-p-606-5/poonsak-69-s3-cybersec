@@ -1,88 +1,88 @@
-# REST
+# REST API request template
+# Values read from .env (same folder) via {{$dotenv ...}}; wrapped as file
+# variables so request bodies keep the clean {{var}} names.
 
-## 1. Admin Section
-### 1.1 Login (Admin)
-POST http://localhost:9093/admin/login
+@baseUrl = {{$dotenv baseUrl}}
+@adminFirstName = {{$dotenv adminFirstName}}
+@adminLastName = {{$dotenv adminLastName}}
+@adminEmail = {{$dotenv adminEmail}}
+@adminPassword = {{$dotenv adminPassword}}
+
+@userUsername = {{$dotenv userUsername}}
+@userEmail = {{$dotenv userEmail}}
+@userPassword = {{$dotenv userPassword}}
+
+### 1. Admin Section
+### 1.1 Register Admin
+# @name adminRegister
+POST {{baseUrl}}/admin/auth/register-admin
 Content-Type: application/json
 
 {
-    "email": "",
-    "password": "",
-    "rememberMe": true
+  "firstname": "{{adminFirstName}}",
+  "lastname": "{{adminLastName}}",
+  "email": "{{adminEmail}}",
+  "password": "{{adminPassword}}",
+  "rememberMe": true
 }
 
-### 1.2 Signup
-POST http://localhost:9093/admin/register
+### 1.2 Admin Login
+# @name adminLogin
+POST {{baseUrl}}/admin/auth/login
 Content-Type: application/json
 
 {
-    "username": "",
-    "email": "",
-    "password": ""
+  "email": "{{adminEmail}}",
+  "password": "{{adminPassword}}",
+  "rememberMe": true
 }
 
-### 1.3 Forgot Password
-POST http://localhost:9093/admin/forgot-password
+### 1.3 Admin Forgot Password
+# @name adminForgotPassword
+POST {{baseUrl}}/admin/auth/forgot-password
 Content-Type: application/json
 
 {
-    "email": ""
+  "email": "{{adminEmail}}"
 }
 
-### 1.3.1 Reset Password
-POST http://localhost:9093/admin/reset-password
+### 1.4 Admin Profile
+# @name adminProfile
+GET {{baseUrl}}/admin/auth/users/me
+Authorization: Bearer {{adminLogin.response.body.$.data.token}}
+
+### 2. User Section
+### 2.1 User Register 
+# @name userRegister
+POST {{baseUrl}}/api/auth/register
 Content-Type: application/json
 
 {
-    "code": "",
-    "password": "",
-    "passwordConfirmation": ""
+  "username": "{{userUsername}}",
+  "email": "{{userEmail}}",
+  "password": "{{userPassword}}"
 }
 
-### 1.4 Profile
-GET http://localhost:9093/admin/me
-
-Authorization: Bearer <Token>
-
-## 2. User Section
-### 2.1 Login (User)
-POST http://localhost:9093/api/auth/local
+### 2.2 User Login
+# @name userLogin
+POST {{baseUrl}}/api/auth/login
 Content-Type: application/json
 
 {
-    "identifier": "",
-    "password": ""
+  "identifier": "{{userEmail}}",
+  "password": "{{userPassword}}"
 }
 
-### 2.2 Signup
-POST http://localhost:9093/api/auth/local/register
+### 2.3 User Forgot Password
+# @name userForgotPassword
+POST {{baseUrl}}/api/auth/forgot-password
 Content-Type: application/json
 
 {
-    "username": "",
-    "email": "",
-    "password": ""
+  "email": "{{userEmail}}"
 }
 
-### 2.3 Forgot Password
-POST http://localhost:9093/api/auth/forgot-password
-Content-Type: application/json
-
-{
-    "email": ""
-}
-
-### 2.3.1 Reset Password
-POST http://localhost:9093/api/auth/reset-password
-Content-Type: application/json
-
-{
-    "code": "",
-    "password": "",
-    "passwordConfirmation": ""
-}
-
-### 2.4 Profile
-GET http://localhost:9093/api/auth/me
-
-Authorization: Bearer <Token>
+### 2.4 User Profile
+# @name userProfile
+GET {{baseUrl}}/api/auth/users/me
+Authorization: Bearer {{userLogin.response.body.$.jwt}}

@@ -1,0 +1,4 @@
+{
+  // NOTE: "rest-client.environmentVariablesFile" does NOT exist in humao REST Client.
+  // .env is consumed via {{$dotenv variableName}} inside api.rest / api.rest.simple.
+}
