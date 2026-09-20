@@ -1,21 +1,18 @@
-# REST API request template
-# Values read from .env (same folder) via {{$dotenv ...}}; wrapped as file
-# variables so request bodies keep the clean {{var}} names.
-# Endpoints are the real Strapi routes on this server (admin = /admin/*,
-# users = Users & Permissions /api/auth/local*). keep baseUrl localhost, or
-# use HTTPS before exposing off-machine.
+# REST
 
 @baseUrl = {{$dotenv baseUrl}}
 @adminFirstName = {{$dotenv adminFirstName}}
 @adminLastName = {{$dotenv adminLastName}}
 @adminEmail = {{$dotenv adminEmail}}
 @adminPassword = {{$dotenv adminPassword}}
-
 @userUsername = {{$dotenv userUsername}}
 @userEmail = {{$dotenv userEmail}}
 @userPassword = {{$dotenv userPassword}}
 
-## 1. Admin Section
+@adminResetCode =
+@userResetCode =
+
+## 1. Admin Section (Strapi admin API)
 ### 1.1 Admin Login
 # @name adminLogin
 POST {{baseUrl}}/admin/login
@@ -27,13 +24,53 @@ Content-Type: application/json
   "rememberMe": false
 }
 
-### 1.2 Admin Profile
-# @name adminProfile
-GET {{baseUrl}}/admin/users/me
+
+### 1.2 Signup
+POST {{baseUrl}}/admin/register
+Content-Type: application/json
+
+{
+    "username": "",
+    "email": "",
+    "password": ""
+}
+
+### 1.3 Admin Forgot Password
+# @name adminForgotPassword
+POST {{baseUrl}}/admin/forgot-password
+Content-Type: application/json
+
+{
+  "email": "{{adminEmail}}"
+}
+
+### 1.3.1 Admin Reset Password
+# @name adminResetPassword
+
+{
+  "resetPasswordToken": "{{adminResetCode}}",
+  "password": "{{adminPassword}}"
+}
+
+### 1.4 Admin Me (shortcut)
+# @name adminMe
+
+GET {{baseUrl}}/admin/me
 Authorization: Bearer {{adminLogin.response.body.$.data.token}}
 
-## 2. User Section
-### 2.1 User Register
+## 2. User Section (Strapi Users & Permissions)
+
+### 2.1 User Login
+# @name userLogin
+POST {{baseUrl}}/api/auth/local
+Content-Type: application/json
+
+{
+  "identifier": "{{userEmail}}",
+  "password": "{{userPassword}}"
+}
+
+### 2.2 User Register
 # @name userRegister
 POST {{baseUrl}}/api/auth/local/register
 Content-Type: application/json
@@ -44,17 +81,26 @@ Content-Type: application/json
   "password": "{{userPassword}}"
 }
 
-### 2.2 User Login
-# @name userLogin
-POST {{baseUrl}}/api/auth/local
+### 2.3 User Forgot Password
+# @name userForgotPassword
+POST {{baseUrl}}/api/auth/forgot-password
 Content-Type: application/json
 
 {
-  "identifier": "{{userEmail}}",
-  "password": "{{userPassword}}"
+  "email": "{{userEmail}}"
 }
 
-### 2.3 User Profile
+### 2.3.1 User Reset Password
+# @name userResetPassword
+
+
+{
+  "code": "{{userResetCode}}",
+  "password": "{{userPassword}}",
+  "passwordConfirmation": "{{userPassword}}"
+}
+
+### 2.4 User Profile
 # @name userProfile
 GET {{baseUrl}}/api/users/me
 Authorization: Bearer {{userLogin.response.body.$.jwt}}
