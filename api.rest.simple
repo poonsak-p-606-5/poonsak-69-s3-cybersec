@@ -104,3 +104,111 @@ Content-Type: application/json
 # @name userProfile
 GET {{baseUrl}}/api/users/me
 Authorization: Bearer {{userLogin.response.body.$.jwt}}
+
+## 3. Content Section (Strapi Content-Type API)
+### 3.1 Student
+#### 3.1.1 Create
+# @name studentCreate
+POST {{baseUrl}}/api/students
+Authorization: Bearer {{userLogin.response.body.$.jwt}}
+Content-Type: application/json
+
+{
+  "data": {
+    "name": "{{$dotenv studentName}}",
+    "mobile": "{{$dotenv studentMobile}}",
+    "cardId": "{{$dotenv studentCardId}}"
+  }
+}
+
+#### 3.1.2 List All
+# @name studentList
+GET {{baseUrl}}/api/students?publicationState=preview
+Authorization: Bearer {{userLogin.response.body.$.jwt}}
+
+#### 3.1.3 List with ID
+# @name studentFindOne
+GET {{baseUrl}}/api/students/{{studentCreate.response.body.$.data.id}}?publicationState=preview
+Authorization: Bearer {{userLogin.response.body.$.jwt}}
+
+#### 3.1.4 Update
+# @name studentUpdate
+PUT {{baseUrl}}/api/students/{{studentCreate.response.body.$.data.id}}
+Authorization: Bearer {{userLogin.response.body.$.jwt}}
+Content-Type: application/json
+
+{
+  "data": {
+    "name": "{{$dotenv studentNameUpdate}}"
+  }
+}
+
+### 3.2 Subject
+#### 3.2.1 Create
+# @name subjectCreate
+POST {{baseUrl}}/api/subjects
+Authorization: Bearer {{userLogin.response.body.$.jwt}}
+Content-Type: application/json
+
+{
+  "data": {
+    "name": "{{$dotenv subjectName}}"
+  }
+}
+
+#### 3.2.2 List All
+# @name subjectList
+GET {{baseUrl}}/api/subjects?publicationState=preview
+Authorization: Bearer {{userLogin.response.body.$.jwt}}
+
+#### 3.2.3 List with ID
+# @name subjectFindOne
+GET {{baseUrl}}/api/subjects/{{subjectCreate.response.body.$.data.id}}?publicationState=preview
+Authorization: Bearer {{userLogin.response.body.$.jwt}}
+
+#### 3.2.4 Update
+# @name subjectUpdate
+PUT {{baseUrl}}/api/subjects/{{subjectCreate.response.body.$.data.id}}
+Authorization: Bearer {{userLogin.response.body.$.jwt}}
+Content-Type: application/json
+
+{
+  "data": {
+    "name": "{{$dotenv subjectNameUpdate}}"
+  }
+}
+
+### 3.3 Teacher
+#### 3.3.1 Create
+# @name teacherCreate
+POST {{baseUrl}}/api/teachers
+Authorization: Bearer {{userLogin.response.body.$.jwt}}
+Content-Type: application/json
+
+{
+  "data": {
+    "name": "{{$dotenv teacherName}}"
+  }
+}
+
+#### 3.3.2 List All
+# @name teacherList
+GET {{baseUrl}}/api/teachers?publicationState=preview
+Authorization: Bearer {{userLogin.response.body.$.jwt}}
+
+#### 3.3.3 List with ID
+# @name teacherFindOne
+GET {{baseUrl}}/api/teachers/{{teacherCreate.response.body.$.data.id}}?publicationState=preview
+Authorization: Bearer {{userLogin.response.body.$.jwt}}
+
+#### 3.3.4 Update
+# @name teacherUpdate
+PUT {{baseUrl}}/api/teachers/{{teacherCreate.response.body.$.data.id}}
+Authorization: Bearer {{userLogin.response.body.$.jwt}}
+Content-Type: application/json
+
+{
+  "data": {
+    "name": "{{$dotenv teacherNameUpdate}}"
+  }
+}
