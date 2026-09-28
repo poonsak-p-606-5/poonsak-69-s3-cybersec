@@ -6,4 +6,4 @@ api.rest
 pgadmin_data
 generated-secrets.ps1
 test-admin-reset.ps1
-test-user-reset.ps1
+test-admin-reset.ps1
